@@ -50,6 +50,8 @@ def annotate_default_point(
     label: str,
     unit: str,
     marker: str = "D",
+    xytext: tuple[int, int] = (28, 34),
+    ha: str = "left",
 ) -> None:
     ax.scatter(
         [x_value],
@@ -64,9 +66,9 @@ def annotate_default_point(
     ax.annotate(
         f"{label}\n{y_value:.2f} {unit}",
         xy=(x_value, y_value),
-        xytext=(14, 18),
+        xytext=xytext,
         textcoords="offset points",
-        ha="left",
+        ha=ha,
         fontsize=8.5,
         bbox={"boxstyle": "round,pad=0.28", "fc": "white", "ec": "#cbd5e1"},
         arrowprops={"arrowstyle": "->", "color": "#64748b", "lw": 0.9},
@@ -125,6 +127,8 @@ def plot_load_sweep(config_path: str = "config.yaml") -> Path:
         default_result.required_joint_torque_nm,
         f"Default load / 默认负载 = {base_input.load_mass_kg:g} kg",
         "N·m",
+        xytext=(-28, 54),
+        ha="right",
     )
     finish_plot(fig, ax)
 
@@ -211,6 +215,7 @@ def plot_motor_speed_sweep(config_path: str = "config.yaml") -> Path:
         f"Default gear ratio / 默认减速比 = {base_input.gear_ratio:g}",
         "rpm",
         marker="o",
+        xytext=(30, -82),
     )
     finish_plot(fig, ax)
 
